@@ -1,3 +1,5 @@
-# Kripto Takip 2
+# Custom Paint
 
 --
+
+## Birşeyler çiziyorum
