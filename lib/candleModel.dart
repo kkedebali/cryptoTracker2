@@ -18,14 +18,15 @@ class Candle {
   bool get isBullish => close >= open;
 
   factory Candle.fromJson(Map<String, dynamic> json) {
-    final kline = json['k'];
-    return Candle(
-      date: DateTime.fromMillisecondsSinceEpoch(kline['t']),
-      open: double.parse(kline['o']),
-      high: double.parse(kline['h']),
-      low: double.parse(kline['l']),
-      close: double.parse(kline['c']),
-      volume: double.parse(kline['v']),
-    );
-  }
+  final kline = json['k'] ?? json; 
+
+  return Candle(
+    date: DateTime.fromMillisecondsSinceEpoch(kline['t']),
+    open: double.parse(kline['o'].toString()),
+    high: double.parse(kline['h'].toString()),
+    low: double.parse(kline['l'].toString()),
+    close: double.parse(kline['c'].toString()),
+    volume: double.parse(kline['v'].toString()),
+  );
+}
 }
