@@ -7,6 +7,7 @@ class RgbColorPicker extends StatefulWidget {
   final Function(Color) onColorSelected;
   final double size;
 
+
   const RgbColorPicker({
     super.key,
     required this.onColorSelected,
@@ -52,8 +53,14 @@ class _RgbColorPickerState extends State<RgbColorPicker> {
         children: [
           // 1. KATMAN: Renk Çemberi ve Dokunma Alanı
           GestureDetector(
-            onPanStart: (details) => _renkGuncelle(details.localPosition),
-            onPanUpdate: (details) => _renkGuncelle(details.localPosition),
+            onPanStart: (details) => _renkGuncelle(
+              details.localPosition
+
+            ),
+            onPanUpdate: (details) => _renkGuncelle(
+              details.localPosition
+
+            ),
             onPanEnd: (_) {
               setState(() {
                 dokunulanKonum = null; // Parmağı kaldırınca önizleme kaybolur

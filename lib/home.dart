@@ -5,6 +5,7 @@ import 'package:cryptotrack2/candlePainter.dart';
 import 'package:cryptotrack2/colorPickerWidget.dart';
 import 'package:cryptotrack2/marketRepository.dart';
 import 'package:cryptotrack2/mockCryptoRepository.dart';
+import 'package:cryptotrack2/sliderWidget.dart';
 import 'package:cryptotrack2/testPainter.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> {
     super.initState();
     repo = CryptoMarketRepository();
 
-    _loadInitialDataAndStartStream();
+   // _loadInitialDataAndStartStream();
   }
 
   void loadMockData() {
@@ -152,16 +153,49 @@ class _HomeState extends State<Home> {
   }
 
   final List<Cizgi> cizgiler = [];
-  double awidth = 2;
   Color selectedColor = Colors.white;
 
+  double awidth = 1;
+  double aopacity = 1;
+  double asaturation = 1;
+  double abright = 1;
+  bool isRgbOpen = false;
+  bool isSetOpen = false;
   @override
   Widget build(BuildContext context) {
-    // double currentPrice = _candles.isNotEmpty ? _candles.last.close : 0.0;
+    HSVColor hsvColor = HSVColor.fromColor(selectedColor);
+    Color sonRenk = hsvColor
+        .withSaturation(asaturation)
+        .withValue(abright)
+        .toColor()
+        .withValues(alpha: aopacity);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF121418),
+      backgroundColor: const Color.fromARGB(255, 13, 14, 17),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white70),
+          onPressed: () {
+            setState(() {
+              isSetOpen = !isSetOpen;
+            });
+          },
+        ),
+        title: GestureDetector(
+          onTap: () {
+            setState(() {
+              isRgbOpen = !isRgbOpen;
+            });
+          },
+          child: Container(
+            height: 30,
+            width: 30,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white),
+              color: sonRenk,
+            ),
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.clear, color: Colors.white70),
@@ -183,7 +217,7 @@ class _HomeState extends State<Home> {
                         Cizgi(
                           points: [details.localPosition], // İlk noktayı koyduk
                           adjWidth: awidth, // O anki kalınlığı verdik
-                          color: selectedColor,
+                          color: sonRenk,
                         ),
                       );
                     });
@@ -200,26 +234,65 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            RgbColorPicker(onColorSelected: (p0) {
-              setState(() {
-                selectedColor = p0;
-              });
-            }),
-            Container(
-              decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-              height: 100,
-              width: double.maxFinite,
-              child: Slider(
-                value: awidth,
-                max: 10,
-                min: 1,
-                onChanged: (value) {
+            if (isRgbOpen)
+              RgbColorPicker(
+                size: 150,
+                onColorSelected: (p0) {
                   setState(() {
-                    awidth = value;
+                    selectedColor = p0;
+                    hsvColor = HSVColor.fromColor(p0);
                   });
                 },
               ),
-            ),
+            if (isSetOpen)
+              Column(
+                children: [
+                  CustomSliderSection(
+                    label: 'Parlaklık',
+                    value: abright,
+                    min: 0.0, // 0.0 = Tam Siyah
+                    max: 1.0,
+                    onChanged: (value) {
+                      setState(() {
+                        abright = value;
+                      });
+                    },
+                  ),
+                  CustomSliderSection(
+                    label: 'Opaklık',
+                    min: 0.1,
+                    max: 1,
+                    value: aopacity,
+                    onChanged: (value) {
+                      setState(() {
+                        aopacity = value;
+                      });
+                    },
+                  ),
+                  CustomSliderSection(
+                    label: 'Doygunluk',
+                    min: 0.0,
+                    max: 1,
+                    value: asaturation,
+                    onChanged: (value) {
+                      setState(() {
+                        asaturation = value;
+                      });
+                    },
+                  ),
+                  CustomSliderSection(
+                    label: 'Boyut',
+                    min: 1,
+                    max: 20,
+                    value: awidth,
+                    onChanged: (value) {
+                      setState(() {
+                        awidth = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
           ],
         ),
       ),
