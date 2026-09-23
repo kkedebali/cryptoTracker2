@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:cryptotrack2/candleModel.dart';
+import 'package:paintapp/OLD/candleModel.dart';
 
 class MockCryptoRepository {
 

@@ -1,5 +1,5 @@
-import 'package:cryptotrack2/home.dart';
-import 'package:cryptotrack2/marketRepository.dart';
+import 'package:paintapp/UI/home.dart';
+import 'package:paintapp/OLD/marketRepository.dart';
 import 'package:flutter/material.dart';
 
 CryptoMarketRepository repo = CryptoMarketRepository();

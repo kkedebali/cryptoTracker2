@@ -1,6 +1,6 @@
-import 'package:cryptotrack2/colorPickerWidget.dart';
-import 'package:cryptotrack2/sliderWidget.dart';
-import 'package:cryptotrack2/testPainter.dart';
+import 'package:paintapp/UI/Widgets/colorPickerWidget.dart';
+import 'package:paintapp/UI/Widgets/sliderWidget.dart';
+import 'package:paintapp/Painters/testPainter.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:isolate';
-import 'package:cryptotrack2/candleModel.dart';
+import 'package:paintapp/OLD/candleModel.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:http/http.dart' as http;
 

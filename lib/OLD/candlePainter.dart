@@ -1,4 +1,4 @@
-import 'package:cryptotrack2/candleModel.dart';
+import 'package:paintapp/OLD/candleModel.dart';
 import 'package:flutter/material.dart';
 
 class CandlePainter extends CustomPainter {

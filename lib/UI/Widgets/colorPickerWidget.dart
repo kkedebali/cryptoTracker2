@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:cryptotrack2/rgbWheel.dart';
+import 'package:paintapp/Painters/rgbWheel.dart';
 import 'package:flutter/material.dart';
 
 class RgbColorPicker extends StatefulWidget {
